@@ -6,7 +6,11 @@
                   Completed
                 </span>
               </div>
-              
+               
+              <div v-if="!doneTasks.length" class="text-center bg-zinc-700 rounded-md text-zinc-500 py-2 bg-opacity-20">
+                Empty
+              </div>
+
               <div v-for="task in doneTasks" :key="task.id" class="mb-1">
                 <div class="flex justify-between items-center bg-zinc-900 p-2 rounded-md text-white">
                 <span>{{task.task}}</span>

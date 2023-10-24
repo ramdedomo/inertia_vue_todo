@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
       return Inertia('Main', ['tasks' => Task::orderBy('updated_at', 'desc')->get()]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(TaskRequest $request)
     {
-        $validated = $request->validate([
-            'task' => 'required|string',
-        ]);
-
         Task::create([
-            'task' => $validated['task'],
-            'isDone' => 0,
+            'task' => $request['task'],
+            'isDone' => $request['isDone'],
         ]);
 
-        return redirect()->route('index')->with('success','');
+        return redirect()->route('index');
     }
 
     /**
@@ -60,7 +58,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(string $id)
     {
         $task = Task::find($id);
         $task->update([

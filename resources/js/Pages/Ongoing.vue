@@ -3,10 +3,14 @@
               <div class="relative">
                 <hr class="my-4">
                 <span class="absolute text-white -top-3 bg-zinc-800 pr-3">
-                  On Going
+                  Todo
                 </span>
               </div>
 
+                        
+              <div v-if="!ongoingTasks.length" class="text-center bg-zinc-700 rounded-md text-zinc-500 py-2 bg-opacity-20">
+                You're all caught up!
+              </div>
   
               <div v-for="task in ongoingTasks" :key="task.id" class="mb-1">
               <div class="flex justify-between items-center bg-zinc-900 p-2 rounded-md text-white">
